@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Submit Story — FableFlow</title><link rel="stylesheet" href="sstyle.css"></head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="index.html">FableFlow</a>
+    <div class="nav-actions">
+      <a class="small-btn" href="stories.html">Stories</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h2>Submit a Story</h2>
+    <form id="storyForm" class="form" novalidate>
+      <label>Title <input id="title" required /></label>
+      <label>Author <input id="author" required /></label>
+      <label>Tags (comma separated) <input id="tags" /></label>
+      <label>Cover image URL (optional) <input id="cover" placeholder="https://..." /></label>
+      <label>Audio narration URL (optional) <input id="audio" placeholder="https://... (mp3)" /></label>
+      <label>Type
+        <select id="type">
+          <option value="static">Static (plain)</option>
+          <option value="interactive">Interactive (branching)</option>
+        </select>
+      </label>
+
+      <!-- plain content -->
+      <label id="plainLabel">Content <textarea id="content" rows="8"></textarea></label>
+
+      <!-- interactive editor -->
+      <div id="interactiveEditor" style="display:none">
+        <p class="muted">Build nodes for the interactive story. Each node needs an id (e.g. n1), text, optional image/audio, and 0+ options linking to other node ids.</p>
+        <div id="nodesList"></div>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <input id="newNodeId" placeholder="node id (e.g. n1)"/>
+          <button type="button" id="addNodeBtn">Add Node</button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-top:14px">
+        <button type="submit">Publish</button>
+        <button type="reset" class="secondary">Reset</button>
+      </div>
+      <div id="formMsg" class="form-msg" aria-live="polite"></div>
+    </form>
+    <hr/>
+    <h3>Interactive editor hints</h3>
+    <ol>
+      <li>Create a node id (n1). Edit its text, add options with labels and target node ids.</li>
+      <li>Set the story <em>start node</em> when publishing by entering the start node id when prompted.</li>
+    </ol>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    // interactive editor logic
+    const typeEl = document.getElementById('type');
+    const interactiveEditor = document.getElementById('interactiveEditor');
+    const plainLabel = document.getElementById('plainLabel');
+    const nodesList = document.getElementById('nodesList');
+    const addNodeBtn = document.getElementById('addNodeBtn');
+    const newNodeId = document.getElementById('newNodeId');
+
+    let nodes = {}; // in-memory nodes map
+
+    typeEl.addEventListener('change', ()=> {
+      if(typeEl.value === 'interactive'){ interactiveEditor.style.display='block'; plainLabel.style.display='none'; }
+      else { interactiveEditor.style.display='none'; plainLabel.style.display='block'; }
+    });
+
+    addNodeBtn.addEventListener('click', ()=> {
+      const id = newNodeId.value.trim();
+      if(!id) return alert('Enter node id (e.g. n1)');
+      if(nodes[id]) return alert('Node exists');
+      nodes[id] = { text:'', options:[] };
+      newNodeId.value='';
+      renderNodes();
+    });
+
+    function renderNodes(){
+      nodesList.innerHTML = '';
+      Object.keys(nodes).forEach(id=>{
+        const n = nodes[id];
+        const wrapper = document.createElement('div');
+        wrapper.className = 'card';
+        wrapper.style.marginBottom = '10px';
+        wrapper.innerHTML = `<strong>${id}</strong>
+          <label>Text <textarea data-id="${id}" class="node-text" rows="3">${n.text}</textarea></label>
+          <label>Image URL (optional) <input data-id="${id}" class="node-image" value="${n.image||''}"/></label>
+          <label>Audio URL (optional) <input data-id="${id}" class="node-audio" value="${n.audio||''}"/></label>
+          <div class="muted">Options:</div>
+          <div class="opts" data-id="${id}"></div>
+          <div style="display:flex;gap:6px;margin-top:8px">
+            <input placeholder="label" class="opt-label"/><input placeholder="target node id (e.g. n2)" class="opt-target"/>
+            <button class="add-opt">Add Option</button>
+            <button class="del-node">Delete Node</button>
+          </div>`;
+        nodesList.appendChild(wrapper);
+
+        // populate options
+        const optsDiv = wrapper.querySelector('.opts');
+        n.options.forEach((o, idx)=>{
+          const p = document.createElement('div');
+          p.textContent = `${o.label} → ${o.target}`;
+          const btn = document.createElement('button');
+          btn.textContent = 'Remove';
+          btn.style.marginLeft='8px';
+          btn.addEventListener('click', ()=> { n.options.splice(idx,1); renderNodes(); });
+          p.appendChild(btn);
+          optsDiv.appendChild(p);
+        });
+
+        // events
+        wrapper.querySelector('.node-text').addEventListener('input', (e)=> { n.text = e.target.value; });
+        wrapper.querySelector('.node-image').addEventListener('input', (e)=> { n.image = e.target.value; });
+        wrapper.querySelector('.node-audio').addEventListener('input', (e)=> { n.audio = e.target.value; });
+        wrapper.querySelector('.add-opt').addEventListener('click', ()=>{
+          const label = wrapper.querySelector('.opt-label').value.trim();
+          const target = wrapper.querySelector('.opt-target').value.trim();
+          if(!label || !target) return alert('Both label and target required');
+          n.options.push({ label, target });
+          wrapper.querySelector('.opt-label').value = '';
+          wrapper.querySelector('.opt-target').value = '';
+          renderNodes();
+        });
+        wrapper.querySelector('.del-node').addEventListener('click', ()=>{
+          if(!confirm('Delete node?')) return;
+          delete nodes[id];
+          // also remove references in options
+          Object.values(nodes).forEach(nn=> { nn.options = nn.options.filter(o=> o.target !== id); });
+          renderNodes();
+        });
+      });
+    }
+
+    // submit form
+    document.getElementById('storyForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const title = document.getElementById('title').value.trim();
+      const author = document.getElementById('author').value.trim();
+      if(title.length < 3){ alert('Title too short'); return; }
+      if(author.length < 2){ alert('Author required'); return; }
+      const tags = document.getElementById('tags').value.split(',').map(s=>s.trim()).filter(Boolean);
+      const cover = document.getElementById('cover').value.trim();
+      const audio = document.getElementById('audio').value.trim();
+      const type = typeEl.value;
+      if(type === 'static'){
+        const content = document.getElementById('content').value.trim();
+        if(content.length < 20) return alert('Content must be at least 20 characters.');
+        const story = { title, author, type:'static', tags, content, created: Date.now(), coverImageURL: cover || '', audioURL: audio || '' };
+        window.app.saveStory(story);
+        alert('Saved static story'); location.href='stories.html';
+      } else {
+        // interactive
+        if(Object.keys(nodes).length === 0) return alert('Add at least one node');
+        const start = prompt('Enter start node id (e.g. n1). The node must exist:', Object.keys(nodes)[0]);
+        if(!start || !nodes[start]) return alert('Invalid start node');
+        const story = { title, author, type:'interactive', tags, nodes, startNodeId: start, created: Date.now(), coverImageURL: cover || '', audioURL: audio || '' };
+        window.app.saveStory(story);
+        alert('Saved interactive story'); location.href='stories.html';
+      }
+    });
+
+    // Reset handler clears the editor
+    document.getElementById('storyForm').addEventListener('reset', ()=>{
+      nodes = {}; renderNodes();
+      document.getElementById('content').value = '';
+      document.getElementById('cover').value = '';
+      document.getElementById('audio').value = '';
+    });
+
+    // init
+    renderNodes();
+  </script>
+</body>
+</html>

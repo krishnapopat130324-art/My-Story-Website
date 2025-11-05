@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Story — FableFlow</title>
+  <link rel="stylesheet" href="sstyle.css">
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="index.html">FableFlow</a>
+    <div class="nav-links">
+      <a href="stories.html">Stories</a>
+      <a href="submit.html">Submit</a>
+      <a href="profile.html">Profile</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <article id="storyDetail" class="story-article"></article>
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const id = new URLSearchParams(location.search).get('id');
+      if(!id){ document.getElementById('storyDetail').innerHTML = '<p>Story not found.</p>'; return; }
+      window.app.renderStoryDetail(id);
+    });
+  </script>
+</body>
+</html>

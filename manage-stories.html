@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Stories | My Story Admin</title>
+  <link rel="stylesheet" href="sstyle.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="admin-body">
+  <header class="admin-header">
+    <h1>📚 Manage Stories</h1>
+    <nav class="admin-nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="add-story.html">Add Story</a>
+      <a href="manage-stories.html" class="active">Manage Stories</a>
+      <a href="messages.html">Messages</a>
+      <a href="index.html">Logout</a>
+    </nav>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-section">
+      <h2>All Stories</h2>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>The Lost Kingdom</td>
+            <td>Fantasy</td>
+            <td>2025-10-30</td>
+            <td>
+              <button class="btn-edit" onclick="alert('Edit story coming soon!')">Edit</button>
+              <button class="btn-delete" onclick="this.closest('tr').remove()">Delete</button>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Haunted Lake</td>
+            <td>Horror</td>
+            <td>2025-10-28</td>
+            <td>
+              <button class="btn-edit" onclick="alert('Edit story coming soon!')">Edit</button>
+              <button class="btn-delete" onclick="this.closest('tr').remove()">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="admin-footer">
+    <p>© 2025 My Story Admin Panel</p>
+  </footer>
+</body>
+</html>

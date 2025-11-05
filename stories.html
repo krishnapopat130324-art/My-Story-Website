@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>All Stories — My Story Website</title>
+  <link rel="stylesheet" href="sstyle.css">
+  <script src="script.js" defer></script>
+  <style>
+    .search-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto 30px;
+      gap: 10px;
+      max-width: 600px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 10px 16px;
+      border: 2px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .search-bar input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+
+    .search-bar button {
+      background: linear-gradient(to right, #3b82f6, #9333ea);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .search-bar button:hover {
+      opacity: 0.9;
+    }
+
+    .no-results {
+      text-align: center;
+      color: #6b7280;
+      font-size: 1rem;
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <h1><span aria-hidden>📖</span> My Story Collection</h1>
+      <div class="header-controls" style="margin-left:auto">
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="stories.html" class="active">Stories</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="admin-login.html">Admin</a>
+        </nav>
+        <button onclick="openMusicPlayer()">🎵 Open Music Player</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card scroll-animate">
+      <h2>All Stories</h2>
+      <p style="color:#374151;margin-top:8px">Browse or search through our complete story collection.</p>
+
+      <!-- 🔍 SEARCH BAR -->
+      <div class="search-bar">
+        <input type="text" id="storySearch" placeholder="Search stories by title or genre..." onkeyup="searchStories()">
+        <button onclick="searchStories()">Search</button>
+      </div>
+
+      <div class="story-grid" id="storyGrid" style="margin-top:20px">
+
+        <!-- Story 1 -->
+        <article class="story-card scroll-animate">
+          <div class="story-thumb">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1400&auto=format&fit=crop" alt="Sketchbook">
+          </div>
+          <div class="story-body">
+            <div class="story-meta">Fiction • 8 min read</div>
+            <div class="story-title">The Lost Dream</div>
+            <div class="story-desc">A young artist finds a mysterious sketchbook; each drawing she completes reveals pieces of her own story.</div>
+            <a class="read-more" href="story1.html">Read Story</a>
+          </div>
+        </article>
+
+        <!-- Story 2 -->
+        <article class="story-card scroll-animate">
+          <div class="story-thumb">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1600&auto=format&fit=crop" alt="Ocean">
+          </div>
+          <div class="story-body">
+            <div class="story-meta">Drama • 10 min read</div>
+            <div class="story-title">Echoes of the Ocean</div>
+            <div class="story-desc">A marine biologist follows strange sounds from beneath the sea and discovers a secret that connects to her past.</div>
+            <a class="read-more" href="story2.html">Read Story</a>
+          </div>
+        </article>
+
+        <!-- Story 3 -->
+        <article class="story-card scroll-animate">
+          <div class="story-thumb">
+            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1400&auto=format&fit=crop" alt="Typewriter">
+          </div>
+          <div class="story-body">
+            <div class="story-meta">Mystery • 6 min read</div>
+            <div class="story-title">Midnight Letters</div>
+            <div class="story-desc">An anonymous letter appears at midnight; its writer knows more about the town than anyone expects.</div>
+            <a class="read-more" href="story3.html">Read Story</a>
+          </div>
+        </article>
+
+        <!-- Story 4 -->
+        <article class="story-card scroll-animate">
+          <div class="story-thumb">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop" alt="Forest path">
+          </div>
+          <div class="story-body">
+            <div class="story-meta">Adventure • 7 min read</div>
+            <div class="story-title">Whispers of the Forest</div>
+            <div class="story-desc">Deep in the misty woods, a traveler discovers ancient trees that seem to whisper stories of forgotten worlds.</div>
+            <a class="read-more" href="story4.html">Read Story</a>
+          </div>
+        </article>
+
+        <!-- Story 5 -->
+        <article class="story-card scroll-animate">
+          <div class="story-thumb">
+            <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop" alt="City night">
+          </div>
+          <div class="story-body">
+            <div class="story-meta">Sci-Fi • 9 min read</div>
+            <div class="story-title">Neon Nights</div>
+            <div class="story-desc">In a futuristic city where memories are traded like currency, one hacker risks it all to recover his lost identity.</div>
+            <a class="read-more" href="story5.html">Read Story</a>
+          </div>
+        </article>
+
+      </div>
+
+      <div id="noResults" class="no-results">No stories found matching your search.</div>
+    </section>
+  </main>
+
+  <footer>© 2025 My Story Website — Designed by Krishna Popat</footer>
+
+  <!-- 🔍 Search Script -->
+  <script>
+    function searchStories() {
+      const query = document.getElementById('storySearch').value.toLowerCase();
+      const stories = document.querySelectorAll('.story-card');
+      let visibleCount = 0;
+
+      stories.forEach(story => {
+        const title = story.querySelector('.story-title').innerText.toLowerCase();
+        const desc = story.querySelector('.story-desc').innerText.toLowerCase();
+        const meta = story.querySelector('.story-meta').innerText.toLowerCase();
+
+        if (title.includes(query) || desc.includes(query) || meta.includes(query)) {
+          story.style.display = 'block';
+          visibleCount++;
+        } else {
+          story.style.display = 'none';
+        }
+      });
+
+      document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+  </script>
+</body>
+</html>

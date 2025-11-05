@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — My Story Website</title>
+  <link rel="stylesheet" href="sstyle.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <h1>Contact</h1>
+      <div class="header-controls">
+        <nav><a href="index.html">Home</a><a href="stories.html">Stories</a></nav>
+        <button onclick="openMusicPlayer()">🎵 Open Music Player</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card scroll-animate">
+      <h2>Get in touch</h2>
+      <form id="contactForm" onsubmit="validateContactForm(event)" style="margin-top:12px">
+        <label for="name">Full Name</label>
+        <input id="name" type="text" placeholder="Your name" required>
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@example.com" required>
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" placeholder="Write your message..." required></textarea>
+        <div class="form-actions">
+          <button type="submit">Send Message</button>
+          <button type="reset" style="background:#ef4444">Reset</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>© 2025 My Story Website</footer>
+</body>
+</html>

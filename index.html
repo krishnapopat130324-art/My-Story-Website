@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Story Website - Home</title>
+  <link rel="stylesheet" href="sstyle.css">
+  <script src="script.js" defer></script>
+
+  <style>
+    /* HERO IMAGE IMPROVEMENTS */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 88vh;
+      overflow: hidden;
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.8);
+    }
+
+    .hero .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 3px 8px rgba(0, 0, 0, 0.6);
+      padding: 0 1rem;
+    }
+
+    .hero .hero-text h2 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .hero .hero-text p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        height: 65vh;
+      }
+      .hero .hero-text h2 {
+        font-size: 2rem;
+      }
+      .hero .hero-text p {
+        font-size: 1rem;
+      }
+    }
+
+    /* STORY HAVEN SECTION */
+    .story-haven {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .story-haven .feature {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      padding: 24px 18px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .story-haven .feature:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(59,130,246,0.15);
+    }
+
+    .story-haven h3 {
+      color: #1e3a8a;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .story-haven p {
+      color: #374151;
+      font-size: 0.95rem;
+    }
+
+    .story-haven .about-text {
+      grid-column: 1 / -1;
+      background: linear-gradient(90deg, #6366f1, #8b5cf6);
+      color: #fff;
+      border-radius: 12px;
+      padding: 40px 24px;
+      box-shadow: 0 10px 25px rgba(99,102,241,0.2);
+    }
+
+    .story-haven .about-text h2 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .story-haven .about-text p {
+      max-width: 700px;
+      margin: 0 auto 16px;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .story-haven .about-text a {
+      display: inline-block;
+      background: #fff;
+      color: #4f46e5;
+      padding: 10px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .story-haven .about-text a:hover {
+      background: #e0e7ff;
+      color: #312e81;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <h1><span aria-hidden>📖</span> <span class="title-typing"></span><span class="typing-cursor" style="background:#fff;height:18px;margin-left:6px;"></span></h1>
+      <div class="header-controls" style="margin-left:auto">
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="stories.html">Stories</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="admin-login.html">Admin</a>
+        </nav>
+        <button onclick="openMusicPlayer()">🎵 Open Music Player</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 🌅 HERO -->
+  <section class="hero">
+    <img src="https://hightide.org.uk/wp-content/uploads/2024/03/Story-Worlds-1920-x-1080.png" alt="Reading Inspiration Banner">
+    <div class="hero-text">
+      <h2>Welcome to My Story World</h2>
+      <p>Dive into tales of imagination, adventure, and emotion — updated weekly.</p>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="card scroll-animate">
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+        <div style="flex:1;min-width:250px">
+          <h2 style="color:#0f172a">Handpicked Stories — New Every Week</h2>
+          <p style="color:#374151;margin-top:8px">
+            We collect short fiction, flash stories and long reads. Browse, preview, and read — all in a beautiful and focused layout.
+          </p>
+          <div style="margin-top:14px"><a class="read-more" href="stories.html">Explore Stories</a></div>
+        </div>
+        <div style="width:280px;border-radius:12px;overflow:hidden;box-shadow:0 10px 20px rgba(59,130,246,0.08)">
+          <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=800&auto=format&fit=crop" alt="Books" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+    </section>
+
+    <!-- 🌟 FEATURED STORIES -->
+    <section class="card scroll-animate">
+      <h2>Featured Stories</h2>
+      <div class="story-grid" style="margin-top:12px">
+        <!-- (All 5 story cards remain the same as your original code) -->
+        <!-- Copy/paste from your previous version -->
+      </div>
+    </section>
+
+    <!-- 🌈 NEW STORY HAVEN SECTION -->
+    <section class="card scroll-animate">
+      <div class="story-haven">
+        <div class="feature">
+          <h3>Diverse Collection</h3>
+          <p>From mystery to romance, explore stories across all genres and find your next favorite read.</p>
+        </div>
+        <div class="feature">
+          <h3>Fresh Content</h3>
+          <p>New stories added regularly. Never run out of amazing content to discover and enjoy.</p>
+        </div>
+        <div class="feature">
+          <h3>Community Driven</h3>
+          <p>Join a community of story lovers. Share your thoughts and connect with fellow readers.</p>
+        </div>
+
+        <div class="about-text">
+          <h2>Welcome to Story Haven</h2>
+          <p>Story Haven is your digital sanctuary for literary exploration. We believe in the power of stories to inspire, educate, and transform lives.</p>
+          <p>Whether you're seeking an escape from reality or looking for profound insights, you'll find stories that resonate with your soul.</p>
+          <a href="about.html">Learn More About Us</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2025 My Story Website — Designed by Krishna Popat</footer>
+</body>
+</html>

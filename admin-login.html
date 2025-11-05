@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard — My Story Website</title>
+  <link rel="stylesheet" href="sstyle.css">
+  <script src="script.js" defer></script>
+
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #eef2ff, #f9fafb);
+      font-family: 'Inter', sans-serif;
+      color: #1f2937;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* --- Main Container --- */
+    main.container {
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      padding: 24px 28px;
+      margin-bottom: 36px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      color: #111827;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    p {
+      color: #374151;
+    }
+
+    /* --- Forms --- */
+    label {
+      display: block;
+      margin-top: 16px;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      margin-top: 6px;
+      font-size: 1rem;
+      background-color: #fff;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #6366f1;
+      outline: none;
+    }
+
+    .upload-box {
+      border: 2px dashed #a5b4fc;
+      padding: 24px;
+      border-radius: 12px;
+      text-align: center;
+      color: #6b7280;
+      background: #f9fafb;
+      margin-top: 8px;
+    }
+
+    /* --- Buttons --- */
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(90deg, #6366f1, #8b5cf6);
+      color: white;
+    }
+
+    button[type="button"] {
+      background: #9ca3af;
+      color: white;
+    }
+
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* --- Story List --- */
+    .story-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .story-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      padding: 12px 16px;
+      border-radius: 10px;
+      transition: background 0.2s;
+    }
+
+    .story-item:hover {
+      background: #eef2ff;
+    }
+
+    .story-item button {
+      background: linear-gradient(90deg, #6366f1, #8b5cf6);
+      color: #fff;
+      padding: 6px 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(90deg, #4f46e5, #7c3aed);
+      color: #f3f4f6;
+      font-size: 0.9rem;
+      margin-top: 50px;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.08);
+    }
+
+    @media (max-width: 700px) {
+      .topbar {
+        flex-direction: column;
+        text-align: center;
+      }
+      nav a {
+        margin: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ✅ SAME NAVBAR AS INDEX -->
+  <header>
+    <div class="topbar">
+      <h1><span aria-hidden>📖</span> <span class="title-typing"></span><span class="typing-cursor" style="background:#fff;height:18px;margin-left:6px;"></span></h1>
+      <div class="header-controls" style="margin-left:auto">
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="stories.html">Stories</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="admin-login.html" style="color:#fff;font-weight:600;">Logout</a>
+        </nav>
+        <button onclick="openMusicPlayer()">🎵 Open Music Player</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN ADMIN DASHBOARD CONTENT -->
+  <main class="container">
+    <section class="card">
+      <h2>Welcome, Admin</h2>
+      <p>Manage your stories and content from this dashboard. You can create, edit, and review all your stories easily.</p>
+    </section>
+
+    <section class="card">
+      <h2>➕ Add New Story</h2>
+      <p>Create and publish a new story to your collection.</p>
+
+      <form onsubmit="event.preventDefault(); alert('Story Published!');">
+        <label>Story Title</label>
+        <input type="text" placeholder="Enter story title">
+
+        <label>Genre</label>
+        <select>
+          <option>Select genre</option>
+          <option>Fiction</option>
+          <option>Drama</option>
+          <option>Mystery</option>
+          <option>Adventure</option>
+          <option>Romance</option>
+          <option>Science Fiction</option>
+        </select>
+
+        <label>Read Time</label>
+        <input type="text" placeholder="e.g., 8 min read">
+
+        <label>Description</label>
+        <textarea placeholder="Brief description of the story..."></textarea>
+
+        <label>Cover Image</label>
+        <div class="upload-box">
+          <p>Click to upload or drag and drop<br><small>PNG, JPG up to 10MB</small></p>
+        </div>
+
+        <label>Story Content</label>
+        <textarea placeholder="Write your story here..." rows="8"></textarea>
+
+        <div style="margin-top:14px; display:flex; gap:10px;">
+          <button type="submit">Publish Story</button>
+          <button type="button">Save as Draft</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>📘 Manage Stories</h2>
+      <p>View and manage your published stories.</p>
+
+      <div class="story-list">
+        <div class="story-item">
+          <div>
+            <strong>The Lost Dream</strong><br>
+            <small style="color:#6b7280;">Published on Nov 1, 2025</small>
+          </div>
+          <button>Edit</button>
+        </div>
+
+        <div class="story-item">
+          <div>
+            <strong>Echoes of the Ocean</strong><br>
+            <small style="color:#6b7280;">Published on Nov 1, 2025</small>
+          </div>
+          <button>Edit</button>
+        </div>
+
+        <div class="story-item">
+          <div>
+            <strong>Midnight Letters</strong><br>
+            <small style="color:#6b7280;">Published on Nov 1, 2025</small>
+          </div>
+          <button>Edit</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2025 My Story Website — Designed by Krishna Popat</footer>
+</body>
+</html>

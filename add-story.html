@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Story | My Story Admin</title>
+  <link rel="stylesheet" href="sstyle.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="admin-body">
+  <header class="admin-header">
+    <h1>📖 Add New Story</h1>
+    <nav class="admin-nav">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="add-story.html" class="active">Add Story</a>
+      <a href="manage-stories.html">Manage Stories</a>
+      <a href="messages.html">Messages</a>
+      <a href="index.html">Logout</a>
+    </nav>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-section">
+      <h2>New Story Details</h2>
+      <form class="story-form" onsubmit="event.preventDefault(); alert('✅ Story added successfully!'); this.reset();">
+        <label for="title">Story Title:</label>
+        <input type="text" id="title" placeholder="Enter story title" required>
+
+        <label for="category">Category:</label>
+        <select id="category" required>
+          <option value="">Select category</option>
+          <option>Fantasy</option>
+          <option>Horror</option>
+          <option>Adventure</option>
+          <option>Romance</option>
+          <option>Mystery</option>
+        </select>
+
+        <label for="content">Story Content:</label>
+        <textarea id="content" rows="8" placeholder="Write your story..." required></textarea>
+
+        <label for="image">Cover Image:</label>
+        <input type="file" id="image" accept="image/*">
+
+        <button type="submit" class="btn-primary">Add Story</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="admin-footer">
+    <p>© 2025 My Story Admin Panel</p>
+  </footer>
+</body>
+</html>
